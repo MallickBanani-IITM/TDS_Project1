@@ -16,6 +16,7 @@ from fastapi.responses import JSONResponse
 import uvicorn
 import traceback
 from dotenv import load_dotenv
+from fastapi.responses import FileResponse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -739,6 +740,10 @@ async def health_check():
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Virtual TA RAG API. Use /query to ask questions or /health to check status."}
+    #from fastapi.responses import FileResponse
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse("static/favicon.ico")
 
 
 if __name__ == "__main__":
