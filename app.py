@@ -735,6 +735,11 @@ async def health_check():
             status_code=500,
             content={"status": "unhealthy", "error": str(e), "api_key_set": bool(API_KEY)}
         )
+        # Root endpoint for base URL
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Virtual TA RAG API. Use /query to ask questions or /health to check status."}
+
 
 if __name__ == "__main__":
     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True) 
